@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
-
+require 'pry'
 class AboutControlStatements < Neo::Koan
-
   def test_if_then_else_statements
     if true
       result = :true_value
@@ -46,15 +45,15 @@ class AboutControlStatements < Neo::Koan
   end
 
   def test_condition_operators
-    assert_equal __, (true ? :true_value : :false_value)
-    assert_equal __, (false ? :true_value : :false_value)
+    assert_equal :true_value, (true ? :true_value : :false_value)
+    assert_equal :false_value, (false ? :true_value : :false_value)
   end
 
   def test_if_statement_modifiers
     result = :default_value
     result = :true_value if true
 
-    assert_equal __, result
+    assert_equal :true_value, result
   end
 
   def test_unless_statement
@@ -62,7 +61,7 @@ class AboutControlStatements < Neo::Koan
     unless false    # same as saying 'if !false', which evaluates as 'if true'
       result = :false_value
     end
-    assert_equal __, result
+    assert_equal :false_value, result
   end
 
   def test_unless_statement_evaluate_true
@@ -70,14 +69,14 @@ class AboutControlStatements < Neo::Koan
     unless true    # same as saying 'if !true', which evaluates as 'if false'
       result = :true_value
     end
-    assert_equal __, result
+    assert_equal :default_value, result
   end
 
   def test_unless_statement_modifier
     result = :default_value
     result = :false_value unless false
 
-    assert_equal __, result
+    assert_equal :false_value, result
   end
 
   def test_while_statement
@@ -87,7 +86,7 @@ class AboutControlStatements < Neo::Koan
       result = result * i
       i += 1
     end
-    assert_equal __, result
+    assert_equal 3628800, result
   end
 
   def test_break_statement
@@ -98,7 +97,7 @@ class AboutControlStatements < Neo::Koan
       result = result * i
       i += 1
     end
-    assert_equal __, result
+    assert_equal 3628800, result
   end
 
   def test_break_statement_returns_values
@@ -107,8 +106,7 @@ class AboutControlStatements < Neo::Koan
       break i if i % 2 == 0
       i += 1
     end
-
-    assert_equal __, result
+    assert_equal 2, result
   end
 
   def test_next_statement
